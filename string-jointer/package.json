@@ -1,7 +1,7 @@
 {
     "name": "string-jointer",
-    "version": "1.0.0",
-    "description": "",
+    "version": "0.0.1",
+    "description": "A tool that works like a Java StringJointer.",
     "main": "dist/index.js",
     "module": "dist/index.esm.js",
     "scripts": {
@@ -9,7 +9,7 @@
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "yueyinqiu5990<lujiaqi2003@126.com>",
-    "license": "ISC",
+    "license": "MIT",
     "contributors": ["ci010<cijhn@hotmail.com>"],
     "devDependencies": {
         "rollup": "^2.39.0",
