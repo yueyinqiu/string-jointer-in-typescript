@@ -1,27 +1,41 @@
 export class StringJointer {
-    private result: string = "";
-    private emptyValue: string = "";
+    private value: string | null = null;
+    public emptyValue: string;
 
-    constructor(public delimiter: string, public prefix: string = "", public suffix: string = "") {
+    constructor(public delimiter: string,
+        public prefix: string = "",
+        public suffix: string = "") {
+        this.emptyValue = this.prefix + this.suffix;
     }
 
-    add(newElement: string) {
-        this.result += newElement;
-        this.result += this.delimiter;
+    public add(newElement: string) {
+        this.value = this.prepareValue + newElement;
         return this;
     }
 
-    get length() {
-        return this.result.length + this.suffix.length + this.prefix.length;
+    public get length() {
+        if(this.value === null)
+            return this.emptyValue.length;
+        return this.value.length + this.suffix.length + this.prefix.length;
     }
 
-    merge​(other: StringJointer) {
-        this.result += other.result;
+    public merge(other: StringJointer) {
+        if(other.value === null)
+            return this;
+        this.value = this.prepareValue + other.value;
         return this;
     }
 
-    setEmptyValue​(emptyValue: string)
+    private get prepareValue()
     {
-        return this;
+        if(this.value === null)
+            return "";
+        return this.value + this.delimiter;
+    }
+
+    public toString() {
+        if (this.value === null)
+            return this.emptyValue;
+        return this.prefix + this.value + this.suffix;
     }
 }

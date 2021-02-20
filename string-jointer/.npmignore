@@ -5,3 +5,4 @@ rollup.config.js
 *.code-workspace
 tsconfig.json
 test
+node_modules
