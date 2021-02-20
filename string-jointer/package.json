@@ -1,0 +1,20 @@
+{
+    "name": "string-jointer",
+    "version": "1.0.0",
+    "description": "",
+    "main": "dist/index.js",
+    "module": "dist/index.esm.js",
+    "scripts": {
+        "build": "rollup -c rollup.config.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "yueyinqiu5990<lujiaqi2003@126.com>",
+    "license": "ISC",
+    "contributors": ["ci010<cijhn@hotmail.com>"],
+    "devDependencies": {
+        "rollup": "^2.39.0",
+        "typescript": "^4.1.5",
+        "tslib": "2.1.0",
+        "@rollup/plugin-typescript": "8.2.0"
+    }
+}

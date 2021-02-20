@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "rootDir": "src",
+        "allowSyntheticDefaultImports": true,
+        "outDir": "dist",
+        "declaration": true,
+        "declarationMap": true,
+        "sourceMap": true,
+        "downlevelIteration": true,
+        "esModuleInterop": true,
+        "experimentalDecorators": true,
+        "target": "ESNext",
+        "module": "esnext",
+        "moduleResolution": "node",
+        "newLine": "LF",
+        "strict": true,
+        "skipLibCheck": true
+    },
+    "include": [
+        "src/*.ts",
+    ]
+}
