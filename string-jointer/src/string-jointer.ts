@@ -21,10 +21,15 @@ export class StringJointer {
         this.emptyValue = this.prefix + this.suffix;
     }
 
-    private get prepareValue() {
+    private get preparedValue() {
         if (this.value === null)
             return "";
         return this.value + this.delimiter;
+    }
+    private get preparedValueWithoutDelimiter() {
+        if (this.value === null)
+            return "";
+        return this.value;
     }
 
     /**
@@ -32,7 +37,26 @@ export class StringJointer {
      * @param newElement the element to add
      */
     public add(newElement: string) {
-        this.value = this.prepareValue + newElement;
+        this.value = this.preparedValue + newElement;
+        return this;
+    }
+
+    /**
+     * Adds some strings as the next elements.
+     * @param newElement the elements to add
+     */
+    public addMany(newElements: Iterable<String>) {
+        if (newElements instanceof Array) {
+            this.value = this.preparedValue + newElements.join(this.delimiter);
+            return this;
+        }
+
+        let tempValue = this.preparedValueWithoutDelimiter;
+        for (let newElement of newElements) {
+            tempValue += this.delimiter;
+            tempValue += newElement;
+        }
+        this.value = tempValue;
         return this;
     }
 
@@ -54,7 +78,7 @@ export class StringJointer {
     public merge(other: StringJointer) {
         if (other.value === null)
             return this;
-        this.value = this.prepareValue + other.value;
+        this.value = this.preparedValue + other.value;
         return this;
     }
 
