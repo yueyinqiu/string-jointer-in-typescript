@@ -5,15 +5,15 @@ export class StringJointer {
     private value: string | null = null;
 
     /**
-     * Gets or sets the string to be used when determining the string representation of this StringJoiner and no elements have been added yet, that is, when it is empty. A copy of the emptyValue parameter is made for this purpose. Note that once an add method has been called, the StringJoiner is no longer considered empty, even if the element(s) added correspond to the empty string.
+     * Gets or sets the string representation that will be used when there is no element.
      */
     public emptyValue: string;
 
     /**
-     * Constructs a StringJoiner with no characters in it using the supplied prefix, delimiter and suffix. If no characters are added to the StringJoiner and methods accessing the string value of it are invoked, it will return the prefix + suffix (or properties thereof) in the result, unless setEmptyValue has first been called.
-     * @param delimiter the string to be used between each element added to the StringJoiner
-     * @param prefix the string to be used at the beginning
-     * @param suffix the string to be used at the end
+     * Constructs a `StringJoiner`.
+     * @param delimiter the string that will be used between each element
+     * @param prefix the string that will be used at the beginning
+     * @param suffix the string that will be used at the end
      */
     constructor(public delimiter: string,
         public prefix: string = "",
@@ -28,7 +28,7 @@ export class StringJointer {
     }
 
     /**
-     * Adds a copy of the given string value as the next element of the StringJoiner value.
+     * Adds a string as the next element.
      * @param newElement the element to add
      */
     public add(newElement: string) {
@@ -37,7 +37,7 @@ export class StringJointer {
     }
 
     /**
-     * Gets the length of the string representation of this StringJoiner. Note that if no add methods have been called, then the length of the string representation (either prefix + suffix or emptyValue) will be returned. The value should be equivalent to toString().length.
+     * Gets the length of the string representation.
      */
     public get length() {
         if (this.value === null)
@@ -46,10 +46,10 @@ export class StringJointer {
     }
 
     /**
-     * Adds the contents of the given StringJoiner without prefix and suffix as the next element if it is non-empty. If the given StringJoiner is empty, the call has no effect.
-     * A StringJoiner is empty if add() has never been called, and if merge() has never been called with a non-empty StringJoiner argument.
-     * If the other StringJoiner is using a different delimiter, then elements from the other StringJoiner are concatenated with that delimiter and the result is appended to this StringJoiner as a single element.
-     * @param other the StringJoiner whose contents should be merged into this one
+     * Adds the contents of a `StringJoiner` without prefix and suffix as the next element.
+     * If the given `StringJoiner` has no element, the call has no effect.
+     * If the given `StringJoiner` is using a different delimiter, then elements from the other StringJoiner are concatenated with that delimiter, and the result is appended to this `StringJoiner` as a single element.
+     * @param other the `StringJoiner` whose contents should be merged into this one
      */
     public merge(other: StringJointer) {
         if (other.value === null)
@@ -59,7 +59,7 @@ export class StringJointer {
     }
 
     /**
-     * Returns the current value, consisting of the prefix, the values added so far separated by the delimiter, and the suffix, unless no elements have been added in which case, the prefix + suffix or the emptyValue characters are returned.
+     * Returns the string representation.
      */
     public toString() {
         if (this.value === null)
