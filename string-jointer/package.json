@@ -1,6 +1,6 @@
 {
     "name": "string-jointer",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "description": "A tool that works like a Java StringJointer.",
     "main": "dist/index.js",
     "module": "dist/index.esm.js",

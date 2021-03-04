@@ -26,11 +26,6 @@ export class StringJointer {
             return "";
         return this.value + this.delimiter;
     }
-    private get preparedValueWithoutDelimiter() {
-        if (this.value === null)
-            return "";
-        return this.value;
-    }
 
     /**
      * Adds a string as the next element.
@@ -51,12 +46,12 @@ export class StringJointer {
             return this;
         }
 
-        let tempValue = this.preparedValueWithoutDelimiter;
+        let tempValue = this.preparedValue;
         for (let newElement of newElements) {
-            tempValue += this.delimiter;
             tempValue += newElement;
+            tempValue += this.delimiter;
         }
-        this.value = tempValue;
+        this.value = tempValue.substring(0, tempValue.length - this.delimiter.length);
         return this;
     }
 
