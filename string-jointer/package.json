@@ -1,6 +1,6 @@
 {
     "name": "string-jointer",
-    "version": "0.0.5",
+    "version": "1.0.0",
     "description": "A tool that works like a Java StringJointer.",
     "main": "dist/index.js",
     "module": "dist/index.esm.js",
@@ -17,6 +17,7 @@
     "contributors": [
         "ci010<cijhn@hotmail.com>"
     ],
+    "readme": "",
     "devDependencies": {
         "@rollup/plugin-typescript": "8.2.0",
         "@types/jest": "^26.0.20",
