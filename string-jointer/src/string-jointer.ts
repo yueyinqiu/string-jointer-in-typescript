@@ -36,6 +36,10 @@ export class StringJointer {
         return this;
     }
 
+    private isStringArrayLike(strings: Iterable<String> | ArrayLike<String>): strings is ArrayLike<String> {
+        return (strings as ArrayLike<String>).length !== undefined;
+    }
+
     /**
      * Adds some strings as the next elements.
      * @param newElement the elements to add
@@ -43,21 +47,20 @@ export class StringJointer {
     public addMany(newElements: Iterable<String> | ArrayLike<String>) {
         let array = newElements as Array<String>;
         if (!array) {
-            let arrayLike = newElements as ArrayLike<String>;
-            if (arrayLike)
-                array = Array.from(arrayLike);
+            if (this.isStringArrayLike(newElements)) {
+                array = Array.from(newElements);
+            }
+            else {
+                let tempValue = this.preparedValue;
+                for (let newElement of newElements) {
+                    tempValue += newElement;
+                    tempValue += this.delimiter;
+                }
+                this.value = tempValue.substring(0, tempValue.length - this.delimiter.length);
+                return this;
+            }
         }
-        if (array) {
-            this.value = this.preparedValue + array.join(this.delimiter);
-            return this;
-        }
-
-        let tempValue = this.preparedValue;
-        for (let newElement of newElements as Iterable<String>) {
-            tempValue += newElement;
-            tempValue += this.delimiter;
-        }
-        this.value = tempValue.substring(0, tempValue.length - this.delimiter.length);
+        this.value = this.preparedValue + array.join(this.delimiter);
         return this;
     }
 
