@@ -36,8 +36,8 @@ export class StringJointer {
         return this;
     }
 
-    private isStringArrayLike(strings: Iterable<String> | ArrayLike<String>): strings is ArrayLike<String> {
-        return (strings as ArrayLike<String>).length !== undefined;
+    private isStringIterable(strings: Iterable<String> | ArrayLike<String>): strings is Iterable<String> {
+        return typeof (strings as Iterable<String>)[Symbol.iterator] === 'function';
     }
 
     /**
@@ -45,23 +45,25 @@ export class StringJointer {
      * @param newElement the elements to add
      */
     public addMany(newElements: Iterable<String> | ArrayLike<String>) {
-        let array = newElements as Array<String>;
-        if (!array) {
-            if (this.isStringArrayLike(newElements)) {
-                array = Array.from(newElements);
-            }
-            else {
-                let tempValue = this.preparedValue;
-                for (let newElement of newElements) {
-                    tempValue += newElement;
-                    tempValue += this.delimiter;
-                }
-                this.value = tempValue.substring(0, tempValue.length - this.delimiter.length);
-                return this;
-            }
+        if(Array.isArray(newElements))
+        {
+            this.value = this.preparedValue + newElements.join(this.delimiter);
+            return this;
         }
-        this.value = this.preparedValue + array.join(this.delimiter);
-        return this;
+        if (this.isStringIterable(newElements)) {
+            let tempValue = this.preparedValue;
+            for (let newElement of newElements) {
+                tempValue += newElement;
+                tempValue += this.delimiter;
+            }
+            this.value = tempValue.substring(0, tempValue.length - this.delimiter.length);
+            return this;
+        }
+        else {
+            let array = Array.from(newElements);
+            this.value = this.preparedValue + array.join(this.delimiter);
+            return this;
+        }
     }
 
     /**
