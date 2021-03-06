@@ -40,14 +40,20 @@ export class StringJointer {
      * Adds some strings as the next elements.
      * @param newElement the elements to add
      */
-    public addMany(newElements: Iterable<String>) {
-        if (newElements instanceof Array) {
-            this.value = this.preparedValue + newElements.join(this.delimiter);
+    public addMany(newElements: Iterable<String> | ArrayLike<String>) {
+        let array = newElements as Array<String>;
+        if (!array) {
+            let arrayLike = newElements as ArrayLike<String>;
+            if (arrayLike)
+                array = Array.from(arrayLike);
+        }
+        if (array) {
+            this.value = this.preparedValue + array.join(this.delimiter);
             return this;
         }
 
         let tempValue = this.preparedValue;
-        for (let newElement of newElements) {
+        for (let newElement of newElements as Iterable<String>) {
             tempValue += newElement;
             tempValue += this.delimiter;
         }
