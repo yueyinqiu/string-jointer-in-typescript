@@ -1,20 +1,18 @@
 import { StringJointer } from "../src/string-jointer";
 
 function getEmptyJointer() {
-    var a = new StringJointer("nothing", "?", "!");
+    let a = new StringJointer("nothing", "?", "!");
     return a;
 }
 function getGreatJointer() {
-    var a = new StringJointer("great", "what", "jointer");
-    a.add("a");
-    a.add("string");
+    let a = new StringJointer("great", "what", "jointer").add("a").add("string");
     return a;
 }
 function getEmotionJointer() {
-    var a = new StringJointer("~awa~~~~~~~~~~~", "!!qaq!!!", "_+_+_+qwq");
-    a.add("|^-^|");
-    a.add("-_- -_-");
-    a.add("--");
+    let a = new StringJointer("~awa~~~~~~~~~~~", "!!qaq!!!", "_+_+_+qwq")
+        .add("|^-^|")
+        .add("-_- -_-")
+        .add("--");
     return a;
 }
 
@@ -42,8 +40,7 @@ test('addMany', () => {
     expect(getGreatJointer().addMany(arrayLike).length).toBe("whatagreatstringgreatabcgreatdefjointer".length);
     expect(getEmptyJointer().addMany(arrayLike).toString()).toBe("?abcnothingdef!");
 
-    function* iterable()
-    {
+    function* iterable() {
         yield "abc";
         yield "def";
     }
